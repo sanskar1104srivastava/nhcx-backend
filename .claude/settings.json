@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/Sahai-full-stack-Hospital-Repository/src/**)",
+      "Bash(cd \"D:\\\\Sahai-full-stack-Hospital-Repository\" && ls package.json 2>/dev/null && cat package.json | head -40)",
+      "Read(//d/Sahai-full-stack-Hospital-Repository/**)",
+      "Bash(cd \"D:\\\\Sahai-full-stack-Hospital-Repository\" && ls node_modules >/dev/null 2>&1 && echo \"node_modules present\" || echo \"node_modules MISSING\")",
+      "Bash(npm install *)"
+    ]
+  }
+}

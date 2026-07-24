@@ -1,0 +1,87 @@
+"""Dev-only endpoints wrapping participantService (§6) and the sandbox-only dummyPayerService
+(§9 tests 3-7) — exposed so the admin frontend can drive them without a Python shell.
+"""
+from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel
+
+from nhcx.config import settings
+from nhcx.constants import PolicyIdentifierType, DummyPayerAction, DummyPayerMethod, OutboundEndpoint, UseCase
+from nhcx.dependencies import requireAdminKey
+from nhcx.services.participantService import participantService
+from nhcx.services.dummyPayerService import dummyPayerService
+from nhcx.services.hcxApiService import hcxApiService
+from nhcx.responses.protocolResponse import buildRejection
+from nhcx.utils.idUtils import newUuid
+
+router = APIRouter(prefix="/sandbox", dependencies=[Depends(requireAdminKey)])
+
+
+@router.get("/policies")
+def getPolicies(identifierType: PolicyIdentifierType, identifierValue: str) -> dict:
+    try:
+        return {"ok": True, "policies": participantService.getPolicies(identifierType, identifierValue)}
+    except Exception as exc:
+        raise HTTPException(502, str(exc))
+
+
+class DummyPayerProcessRequest(BaseModel):
+    correlationId: str
+    action: DummyPayerAction
+    method: DummyPayerMethod
+
+
+@router.post("/dummy-payer/process")
+def processDummyPayerRequest(req: DummyPayerProcessRequest) -> dict:
+    try:
+        return {"ok": True, "response": dummyPayerService.processRequest(req.correlationId, req.action, req.method)}
+    except Exception as exc:
+        raise HTTPException(502, str(exc))
+
+
+class PaymentNoticeInitRequest(BaseModel):
+    correlationId: str
+
+
+@router.post("/dummy-payer/payment-notice")
+def initPaymentNotice(req: PaymentNoticeInitRequest) -> dict:
+    try:
+        return {"ok": True, "response": dummyPayerService.paymentNoticeInit(req.correlationId)}
+    except Exception as exc:
+        raise HTTPException(502, str(exc))
+
+
+class StatusCheckRequest(BaseModel):
+    recipientCode: str
+    targetCorrelationId: str
+
+
+@router.post("/status-check")
+def statusCheck(req: StatusCheckRequest) -> dict:
+    try:
+        return {"ok": True, "response": hcxApiService.checkStatus(settings.nhcxParticipantCode, req.recipientCode, req.targetCorrelationId)}
+    except Exception as exc:
+        raise HTTPException(502, str(exc))
+
+
+class RejectRequest(BaseModel):
+    endpoint: OutboundEndpoint          # e.g. COMMUNICATION_REPLY, PAYMENT_NOTICE_ACK
+    recipientCode: str
+    correlationId: str
+    workflowId: str
+    entityType: UseCase
+    errorCode: str
+    errorMessage: str
+
+
+@router.post("/reject")
+def sendRejection(req: RejectRequest) -> dict:
+    """§5b — send a ProtocolResponse rejection instead of the normal ack-then-process path."""
+    try:
+        body = buildRejection(
+            senderCode=settings.nhcxParticipantCode, recipientCode=req.recipientCode,
+            apiCallId=newUuid(), correlationId=req.correlationId, workflowId=req.workflowId,
+            entityType=req.entityType, errorCode=req.errorCode, errorMessage=req.errorMessage,
+        )
+        return {"ok": True, "response": hcxApiService.sendRejection(req.endpoint.value, body, req.correlationId)}
+    except Exception as exc:
+        raise HTTPException(502, str(exc))

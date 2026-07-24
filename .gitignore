@@ -1,0 +1,11 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.key
+*.crt
+*.csr
+*.b64
+.pytest_cache/
+.serverless/

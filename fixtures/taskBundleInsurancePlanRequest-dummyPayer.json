@@ -1,0 +1,144 @@
+{
+  "resourceType": "Bundle",
+  "id": "TaskBundleForInsurancePlanRequest-dummyPayer-01",
+  "meta": {
+    "profile": ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/TaskBundle"],
+    "security": [{
+      "system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
+      "code": "V",
+      "display": "very restricted"
+    }]
+  },
+  "identifier": {
+    "value": "0d0e50f5-63f3-4459-a3f7-3ec025712dcd"
+  },
+  "type": "collection",
+  "timestamp": "2026-07-16T15:10:00.000+05:30",
+  "entry": [{
+    "fullUrl": "urn:uuid:6a1b7c9d-2e4f-4a8b-9c3d-5e7f8a9b0c1d",
+    "resource": {
+      "resourceType": "Task",
+      "id": "6a1b7c9d-2e4f-4a8b-9c3d-5e7f8a9b0c1d",
+      "meta": {
+        "profile": ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Task"]
+      },
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Insurance plan request for policy 100217</div>"
+      },
+      "status": "requested",
+      "intent": "order",
+      "code": {
+        "coding": [{
+          "system": "http://terminology.hl7.org/CodeSystem/financialtaskcode",
+          "code": "poll"
+        }]
+      },
+      "description": "Request for insurance plan details for policy number - 100217",
+      "authoredOn": "2026-07-16T15:10:00.000+05:30",
+      "requester": {
+        "reference": "urn:uuid:e5625392-6cc3-4410-b30e-1cf960a31303",
+        "display": "Organization"
+      },
+      "owner": {
+        "reference": "urn:uuid:9c17b15c-b9da-44db-9932-97c9c14cd432",
+        "display": "Organization"
+      },
+      "input": [{
+        "type": {
+          "coding": [{
+            "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-task-input-type-code",
+            "code": "policyNumber"
+          }]
+        },
+        "valueString": "100217"
+      }]
+    }
+  },
+  {
+    "fullUrl": "urn:uuid:9c17b15c-b9da-44db-9932-97c9c14cd432",
+    "resource": {
+      "resourceType": "Organization",
+      "id": "9c17b15c-b9da-44db-9932-97c9c14cd432",
+      "meta": {
+        "profile": ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Organization"]
+      },
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">XYZ Insurance Co. Ltd.</div>"
+      },
+      "identifier": [{
+        "type": {
+          "coding": [{
+            "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-identifier-type-code",
+            "code": "ROHINI",
+            "display": "Registry of Hospitals in Network of Insurance (ROHINI) ID"
+          }]
+        },
+        "system": "https://rohini.iib.gov.in/",
+        "value": "4567878"
+      }],
+      "type": [{
+        "coding": [{
+          "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+          "code": "ins",
+          "display": "Insurance Company"
+        }]
+      }],
+      "name": "XYZ Insurance Co. Ltd.",
+      "telecom": [{
+        "system": "phone",
+        "value": "+91 243 2634 1234",
+        "use": "work"
+      },
+      {
+        "system": "email",
+        "value": "contact@xyz.org",
+        "use": "work"
+      }]
+    }
+  },
+  {
+    "fullUrl": "urn:uuid:e5625392-6cc3-4410-b30e-1cf960a31303",
+    "resource": {
+      "resourceType": "Organization",
+      "id": "e5625392-6cc3-4410-b30e-1cf960a31303",
+      "meta": {
+        "profile": ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/Organization"]
+      },
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">XYZ Hospital Co. Ltd.</div>"
+      },
+      "identifier": [{
+        "type": {
+          "coding": [{
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "PRN",
+            "display": "Provider number"
+          }]
+        },
+        "system": "https://facility.ndhm.gov.in",
+        "value": "32722"
+      }],
+      "type": [{
+        "coding": [{
+          "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+          "code": "prov",
+          "display": "Healthcare Provider"
+        }]
+      }],
+      "name": "XYZ Hospital Co. Ltd.",
+      "telecom": [{
+        "system": "phone",
+        "value": "+91 243 2634 7856",
+        "use": "work"
+      },
+      {
+        "system": "email",
+        "value": "contact@xyz.org",
+        "use": "work"
+      }]
+    }
+  }]
+}

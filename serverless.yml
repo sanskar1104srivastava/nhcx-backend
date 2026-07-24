@@ -1,0 +1,123 @@
+service: nhcx-bridge
+
+provider:
+  name: aws
+  region: ${env:AWS_REGION, 'ap-south-1'}
+  ecr:
+    images:
+      appimage:
+        path: ./
+  logs:
+    httpApi:
+      format: '{"requestId":"$context.requestId","ip":"$context.identity.sourceIp","requestTime":"$context.requestTime","httpMethod":"$context.httpMethod","path":"$context.path","routeKey":"$context.routeKey","status":"$context.status","protocol":"$context.protocol","responseLength":"$context.responseLength"}'
+  environment:
+    DYNAMO_TABLE_NAME: ${self:custom.tableName}
+    INBOUND_QUEUE_URL: !Ref InboundQueue
+    NHCX_CLIENT_ID: ${env:NHCX_CLIENT_ID}
+    NHCX_CLIENT_SECRET: ${env:NHCX_CLIENT_SECRET}
+    NHCX_PARTICIPANT_CODE: ${env:NHCX_PARTICIPANT_CODE}
+    ABDM_SESSIONS_URL: ${env:ABDM_SESSIONS_URL}
+    NHCX_GATEWAY_BASE: ${env:NHCX_GATEWAY_BASE}
+    NHCX_PARTICIPANT_BASE: ${env:NHCX_PARTICIPANT_BASE}
+    NHCX_DUMMY_PAYER_BASE: ${env:NHCX_DUMMY_PAYER_BASE}
+    NHCX_BRIDGE_URL: ${env:NHCX_BRIDGE_URL}
+    NHCX_STATUS_PRESET: ${env:NHCX_STATUS_PRESET, 'initiated'}
+    NHCX_TIMESTAMP_PRESET: ${env:NHCX_TIMESTAMP_PRESET, 'iso'}
+    NHCX_PRIVATE_KEY_SECRET_NAME: ${env:NHCX_PRIVATE_KEY_SECRET_NAME, 'nhcx/private-key'}
+    NHCX_DUMMY_PAYER_CODE: ${env:NHCX_DUMMY_PAYER_CODE, '1000003538@hcx'}
+    ADMIN_API_KEY: ${env:ADMIN_API_KEY, ''}
+    LARGE_PAYLOAD_BUCKET: !Ref LargePayloadBucket
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action: [dynamodb:PutItem, dynamodb:GetItem, dynamodb:Query, dynamodb:Scan]
+          Resource:
+            - !GetAtt RequestLogTable.Arn
+            - !Sub "${RequestLogTable.Arn}/index/*"
+        - Effect: Allow
+          Action: [sqs:SendMessage, sqs:ReceiveMessage, sqs:DeleteMessage, sqs:GetQueueAttributes]
+          Resource:
+            - !GetAtt InboundQueue.Arn
+            - !GetAtt InboundDLQ.Arn
+        - Effect: Allow
+          Action: [secretsmanager:GetSecretValue]
+          Resource: "arn:aws:secretsmanager:*:*:secret:nhcx/*"
+        - Effect: Allow
+          Action: [s3:PutObject, s3:GetObject]
+          Resource: !Sub "${LargePayloadBucket.Arn}/*"
+
+custom:
+  tableName: nhcxRequestLog
+
+functions:
+  api:
+    image:
+      name: appimage
+      command: ["nhcx.main.handler"]
+    events:
+      - httpApi: "*"
+    # §5c — this function owns the 202-ack SLA (~500ms). A cold-start or throttled invocation
+    # here is exactly the failure mode that lost ~40% of callbacks on Sahai. reservedConcurrency
+    # guarantees this function always has headroom, independent of other functions/traffic.
+    # Tune the number to expected inbound callback burst size; add provisioned concurrency too
+    # (via the serverless-provisioned-concurrency-autoscaling plugin) if cold starts still bite.
+    reservedConcurrency: 10
+
+  consumer:
+    image:
+      name: appimage
+      command: ["nhcx.consumer.handler"]
+    events:
+      - sqs:
+          arn: !GetAtt InboundQueue.Arn
+          batchSize: 1
+
+resources:
+  Resources:
+    RequestLogTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableName}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: apiCallId
+            AttributeType: S
+          - AttributeName: correlationId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: apiCallId
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: correlationId-index
+            KeySchema:
+              - AttributeName: correlationId
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+
+    InboundQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: nhcxInboundQueue
+        VisibilityTimeout: 60
+        RedrivePolicy:
+          deadLetterTargetArn: !GetAtt InboundDLQ.Arn
+          maxReceiveCount: 3
+
+    # Undecryptable/poison messages (bad key, corrupt payload) land here after 3 tries
+    # instead of retrying forever every 60s — found this the hard way: a message sent
+    # during early testing (before the real key was in Secrets Manager) looped indefinitely.
+    InboundDLQ:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: nhcxInboundDLQ
+        MessageRetentionPeriod: 1209600
+
+    # Bundles/JWE too large for a DynamoDB item (400KB limit) — hit for real testing the
+    # Communication reply flow (attachment-bearing TaskBundle). dbService offloads here
+    # transparently and leaves a pointer (largePayloadS3Key) in the DynamoDB item.
+    LargePayloadBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: !Sub "nhcx-bridge-large-payloads-${AWS::AccountId}-${sls:stage}"
