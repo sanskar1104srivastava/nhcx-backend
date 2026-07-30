@@ -16,3 +16,13 @@ def floatsToDecimal(obj):
     if isinstance(obj, list):
         return [floatsToDecimal(v) for v in obj]
     return obj
+
+
+def decimalsToJsonNumbers(obj):
+    if isinstance(obj, Decimal):
+        return int(obj) if obj == obj.to_integral_value() else float(obj)
+    if isinstance(obj, dict):
+        return {k: decimalsToJsonNumbers(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [decimalsToJsonNumbers(v) for v in obj]
+    return obj

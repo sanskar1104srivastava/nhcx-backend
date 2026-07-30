@@ -31,6 +31,7 @@ class UseCase(StrEnum):
     COMMUNICATION = "communication"
     PAYMENT = "payment"
     TASK = "task"
+    SEARCH = "search"
     STATUS = "status"
 
 
@@ -87,12 +88,14 @@ class OutboundEndpoint(StrEnum):
     COMMUNICATION_REPLY = "/communication/on_request"
     PAYMENT_NOTICE_ACK = "/paymentnotice/on_request"
     REPROCESS = "/task/submit"
+    SEARCH = "/search/submit"
     STATUS = "/status"
 
 
 class ParticipantEndpoint(StrEnum):
     """Plain JSON, no JWE (§6) — relative to NHCX_PARTICIPANT_BASE."""
     FETCH_CERTS = "/fetch/certs"
+    PARTICIPANTS_LIST = "/fetch/participants/list"
     PARTICIPANT_UPDATE = "/participant/update"
     GET_POLICIES = "/participant/get/policies"
     LINK_POLICY = "/participant/link/abha/policy"
@@ -103,6 +106,12 @@ class PolicyIdentifierType(StrEnum):
     ABHA_NUMBER = "AbhaNumber"
     MEMBER_ID = "MemberId"
     MOBILE_NO = "MobileNo"
+
+
+class ParticipantRole(StrEnum):
+    PAYER = "PAYER"
+    PROVIDER = "PROVIDER"
+    TPA = "TPA"
 
 
 class DummyPayerEndpoint(StrEnum):

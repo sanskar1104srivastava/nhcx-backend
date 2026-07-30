@@ -50,6 +50,70 @@ def _buildProtectedHeader(req: OutboundRequest, apiCallId: str, requestId: str, 
     }
 
 
+def _buildStatusTaskBundle(originalEntry, requestId: str) -> dict:
+    taskId = requestId
+    return {
+        "resourceType": "Bundle",
+        "id": f"StatusTaskBundle-{requestId}",
+        "type": "collection",
+        "timestamp": formatHcxTimestamp(),
+        "entry": [
+            {
+                "fullUrl": f"urn:uuid:{taskId}",
+                "resource": {
+                    "resourceType": "Task",
+                    "id": taskId,
+                    "status": "requested",
+                    "intent": "order",
+                    "code": {
+                        "coding": [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/financialtaskcode",
+                                "code": "status",
+                                "display": "Status",
+                            }
+                        ]
+                    },
+                    "description": f"Status check for {originalEntry.useCase} request",
+                    "authoredOn": formatHcxTimestamp(),
+                    "focus": {
+                        "identifier": {
+                            "system": "https://hcxprotocol.io/correlation-id",
+                            "value": originalEntry.correlationId,
+                        }
+                    },
+                    "input": [
+                        {
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "http://terminology.hl7.org/CodeSystem/financialtaskinputtype",
+                                        "code": "entity-type",
+                                        "display": "Entity Type",
+                                    }
+                                ]
+                            },
+                            "valueString": originalEntry.useCase,
+                        },
+                        {
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "http://terminology.hl7.org/CodeSystem/financialtaskinputtype",
+                                        "code": "api-call-id",
+                                        "display": "API Call ID",
+                                    }
+                                ]
+                            },
+                            "valueString": originalEntry.apiCallId,
+                        },
+                    ],
+                },
+            }
+        ],
+    }
+
+
 def _postWithRetry(endpoint: str, jwePayload: str, includeTypeField: bool = False) -> httpx.Response:
     """One POST + one 401-triggered token-refresh retry, shared by every outbound call.
     Confirmed via real sandbox testing, the hard way: reply-style endpoints (on_request/on_submit)
@@ -78,7 +142,7 @@ class HcxApiService:
 
         apiCallId = newUuid()
         requestId = newUuid()
-        correlationId = req.correlationId or newUuid()
+        correlationId = req.correlationId or apiCallId
 
         if req.correlationId:  # a dead correlation_id must never be reused (§4c) — enforce it, don't just document it
             for priorEntry in dbService.findByCorrelationId(req.correlationId):
@@ -128,38 +192,42 @@ class HcxApiService:
             raise
 
     def checkStatus(self, hospitalId: str, recipientCode: str, targetCorrelationId: str) -> dict:
-        """Status check (§5a) — protocol-level, no domain FHIR bundle to validate/store, just
-        the envelope. Confirmed via real sandbox testing: NHCX looks this up by x-hcx-api_call_id
-        of the ORIGINAL request being asked about, not a fresh one minted for this status-check
-        message — sending a fresh id here gets NHCX-1012 "No records found with the requested
-        api caller id" every time."""
+        """Status check (§5a).
+
+        The status request is its own API call. The public HCX spec describes the encrypted domain
+        payload as a FHIR Task. The NHCX sandbox request/response workbook is stricter about the
+        transport correlation id: for /v1/status it expects the original request's api_call_id, not
+        the process correlation id used by the primary flow.
+        """
         priorEntries = [e for e in dbService.findByCorrelationId(targetCorrelationId) if e.useCase != UseCase.STATUS.value]
         if not priorEntries:
             raise ValueError(f"no prior request logged for correlation_id {targetCorrelationId} — nothing to check status on")
-        originalApiCallId = min(priorEntries, key=lambda e: e.createdAt).apiCallId
+        originalEntry = min(priorEntries, key=lambda e: e.createdAt)
 
         apiCallId = newUuid()
         requestId = newUuid()
+        workflowId = originalEntry.workflowId or "11"
+        statusPayload = _buildStatusTaskBundle(originalEntry, requestId)
 
         recipientCert = certService.getCachedPayerCert(recipientCode)
         protectedHeader = {
-            Header.API_CALL_ID.value: originalApiCallId,
-            Header.WORKFLOW_ID.value: "13",
+            Header.API_CALL_ID.value: apiCallId,
+            Header.WORKFLOW_ID.value: workflowId,
             Header.REQUEST_ID.value: requestId,
             Header.STATUS.value: _INITIAL_STATUS,
             Header.TIMESTAMP.value: formatHcxTimestamp(),
             Header.SENDER_CODE.value: settings.nhcxParticipantCode,
             Header.RECIPIENT_CODE.value: recipientCode,
-            Header.CORRELATION_ID.value: targetCorrelationId,
+            Header.CORRELATION_ID.value: originalEntry.apiCallId,
             Header.BEN_ABHA_ID.value: "",
         }
-        jwePayload = encryptPayload({}, wrapCertB64AsPem(recipientCert["encryption_cert"]), protectedHeader)
+        jwePayload = encryptPayload(statusPayload, wrapCertB64AsPem(recipientCert["encryption_cert"]), protectedHeader)
 
         entry = dbService.insertLog(
             hospitalId=hospitalId, useCase=UseCase.STATUS.value, direction=Direction.OUTBOUND.value,
-            correlationId=targetCorrelationId, apiCallId=apiCallId, requestId=requestId, workflowId="13",
+            correlationId=originalEntry.apiCallId, apiCallId=apiCallId, requestId=requestId, workflowId=workflowId,
             senderCode=settings.nhcxParticipantCode, recipientCode=recipientCode, xHcxStatus=_INITIAL_STATUS,
-            jweOut=jwePayload,
+            fhirBundleOut=statusPayload, jweOut=jwePayload,
         )
         try:
             response = _postWithRetry(OutboundEndpoint.STATUS.value, jwePayload)

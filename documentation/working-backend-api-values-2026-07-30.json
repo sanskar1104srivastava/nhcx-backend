@@ -1,0 +1,269 @@
+{
+  "source": {
+    "summary": "Working backend API values collected from local NHCX docs, repo fixtures/scripts, live API responses, and callback evidence in CloudWatch/DynamoDB.",
+    "report": "documentation/live-sandbox-tools-api-check-2026-07-29.md",
+    "fixturesDir": "fixtures",
+    "baseUrl": "${NHCX_BRIDGE_URL}",
+    "deployedAuthHeader": {
+      "name": "X-Admin-Key",
+      "value": "${ADMIN_API_KEY}"
+    },
+    "participants": {
+      "provider": "1000004604@hcx",
+      "dummyPayer": "1000003538@hcx",
+      "hospitalId": "H1"
+    },
+    "knownWorkingBusinessValues": {
+      "claimNumber": "7612345",
+      "policyNumber": "100217",
+      "mobileNumber": "9999999999",
+      "abhaNumber": "11111111111111",
+      "memberId": "5102411699"
+    }
+  },
+  "workingApis": [
+    {
+      "name": "Health",
+      "method": "GET",
+      "path": "/health",
+      "request": {},
+      "expected": {
+        "httpStatus": 200,
+        "bodyContains": {
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "name": "Self Certificate Check",
+      "method": "GET",
+      "path": "/test0/certs/self",
+      "request": {},
+      "expected": {
+        "httpStatus": 200,
+        "participantId": "1000004604@hcx"
+      }
+    },
+    {
+      "name": "Dummy Payer Certificate Check",
+      "method": "GET",
+      "path": "/sandbox/certs",
+      "query": {
+        "participantId": "1000003538@hcx"
+      },
+      "expected": {
+        "httpStatus": 200,
+        "ok": true
+      }
+    },
+    {
+      "name": "Participant List",
+      "method": "GET",
+      "path": "/sandbox/participants",
+      "query": {
+        "role": "PAYER",
+        "fromdate": "01/01/2026",
+        "todate": "29/07/2026"
+      },
+      "workingVariants": [
+        {
+          "role": "PAYER",
+          "expectedRows": 43
+        },
+        {
+          "role": "PROVIDER",
+          "expectedRows": 910
+        },
+        {
+          "role": "TPA",
+          "expectedRows": 0
+        }
+      ],
+      "expected": {
+        "httpStatus": 200,
+        "ok": true
+      }
+    },
+    {
+      "name": "Policy Lookup",
+      "method": "GET",
+      "path": "/sandbox/policies",
+      "query": {
+        "identifierType": "MobileNo",
+        "identifierValue": "9999999999"
+      },
+      "workingVariants": [
+        {
+          "identifierType": "MobileNo",
+          "identifierValue": "9999999999",
+          "expectedRows": 3
+        },
+        {
+          "identifierType": "AbhaNumber",
+          "identifierValue": "11111111111111",
+          "expectedRows": 1
+        },
+        {
+          "identifierType": "MemberId",
+          "identifierValue": "5102411699",
+          "expectedRows": 1
+        }
+      ],
+      "expected": {
+        "httpStatus": 200,
+        "ok": true
+      }
+    },
+    {
+      "name": "Insurance Plan Request",
+      "method": "POST",
+      "path": "/send",
+      "bodyTemplate": {
+        "hospitalId": "H1",
+        "useCase": "insuranceplan",
+        "endpoint": "/insuranceplan/request",
+        "workflowId": "1",
+        "recipientCode": "1000003538@hcx",
+        "fhirBundleRef": "fixtures/taskBundleInsurancePlanRequest-dummyPayer.json"
+      },
+      "expected": {
+        "httpStatus": 200,
+        "protocolStatus": "request.queued",
+        "callbackState": "responded_complete"
+      }
+    },
+    {
+      "name": "Coverage Eligibility Check",
+      "method": "POST",
+      "path": "/send",
+      "bodyTemplate": {
+        "hospitalId": "H1",
+        "useCase": "coverageeligibility",
+        "endpoint": "/coverageeligibility/check",
+        "workflowId": "12",
+        "recipientCode": "1000003538@hcx",
+        "claimNumber": "7612345",
+        "policyNumber": "100217",
+        "fhirBundleRef": "fixtures/coverageEligibilityRequestBundle-dummyPayer.json"
+      },
+      "expected": {
+        "httpStatus": 200,
+        "protocolStatus": "request.queued",
+        "callbackState": "responded_complete"
+      }
+    },
+    {
+      "name": "Preauth Submit",
+      "method": "POST",
+      "path": "/send",
+      "bodyTemplate": {
+        "hospitalId": "H1",
+        "useCase": "preauth",
+        "endpoint": "/preauth/submit",
+        "workflowId": "1",
+        "recipientCode": "1000003538@hcx",
+        "claimNumber": "7612345",
+        "policyNumber": "100217",
+        "fhirBundleRef": "fixtures/claimBundlePreauth-dummyPayer.json"
+      },
+      "expected": {
+        "httpStatus": 200,
+        "protocolStatus": "request.queued",
+        "nextStep": "Call Dummy Payer Process with action=Approve and method=Preauth using this response correlation_id."
+      }
+    },
+    {
+      "name": "Dummy Payer Approve Preauth",
+      "method": "POST",
+      "path": "/sandbox/dummy-payer/process",
+      "bodyTemplate": {
+        "correlationId": "${preauthSubmit.response.correlation_id}",
+        "action": "Approve",
+        "method": "Preauth"
+      },
+      "expected": {
+        "httpStatus": 200,
+        "protocolStatus": "request.dispatched",
+        "callbackState": "responded_complete"
+      }
+    },
+    {
+      "name": "Claim Submit",
+      "method": "POST",
+      "path": "/send",
+      "bodyTemplate": {
+        "hospitalId": "H1",
+        "useCase": "claim",
+        "endpoint": "/claim/submit",
+        "workflowId": "1",
+        "recipientCode": "1000003538@hcx",
+        "claimNumber": "7612345",
+        "policyNumber": "100217",
+        "fhirBundleRef": "fixtures/claimBundleClaim-dummyPayer.json"
+      },
+      "expected": {
+        "httpStatus": 200,
+        "protocolStatus": "request.queued",
+        "nextStep": "Call Dummy Payer Process with action=Approve and method=Claim using this response correlation_id."
+      }
+    },
+    {
+      "name": "Dummy Payer Approve Claim",
+      "method": "POST",
+      "path": "/sandbox/dummy-payer/process",
+      "bodyTemplate": {
+        "correlationId": "${claimSubmit.response.correlation_id}",
+        "action": "Approve",
+        "method": "Claim"
+      },
+      "expected": {
+        "httpStatus": 200,
+        "protocolStatus": "request.dispatched",
+        "callbackState": "responded_complete"
+      }
+    },
+    {
+      "name": "Payment Notice Init",
+      "method": "POST",
+      "path": "/sandbox/dummy-payer/payment-notice",
+      "bodyTemplate": {
+        "correlationId": "${claimSubmit.response.correlation_id}"
+      },
+      "backendAdds": {
+        "providerId": "1000004604@hcx"
+      },
+      "expected": {
+        "httpStatus": 200,
+        "protocolStatus": "request.queued",
+        "callbackUseCase": "payment",
+        "callbackState": "responded_complete"
+      }
+    }
+  ],
+  "notIncludedBecauseNotWorkingOrNotProven": [
+    {
+      "name": "Predetermination",
+      "reason": "NHCX returns NHCX-1002 for this participant/use case."
+    },
+    {
+      "name": "Search",
+      "reason": "Backend exists, but live NHCX returns NHCX-1002."
+    },
+    {
+      "name": "Status Check",
+      "reason": "Backend request shape fixed, but live NHCX returns NHCX-1012."
+    },
+    {
+      "name": "Task/Reprocess",
+      "reason": "NHCX accepts outbound request, but dummy-payer callback was not observed."
+    },
+    {
+      "name": "Communication",
+      "reason": "Dummy-payer process dispatches, but callback was not observed."
+    },
+    {
+      "name": "Reject",
+      "reason": "Needs a real in-flight inbound correlation test before treating as working."
+    }
+  ]
+}

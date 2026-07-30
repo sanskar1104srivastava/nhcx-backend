@@ -24,7 +24,7 @@
       },
       "text" : {
         "status" : "generated",
-        "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><a name=\"Task_a9f8295b-a0cf-410d-9ed5-1370523e57bd\"> </a><p class=\"res-header-id\"><b>Generated Narrative: Task a9f8295b-a0cf-410d-9ed5-1370523e57bd</b></p><a name=\"a9f8295b-a0cf-410d-9ed5-1370523e57bd\"> </a><a name=\"hca9f8295b-a0cf-410d-9ed5-1370523e57bd\"> </a><a name=\"a9f8295b-a0cf-410d-9ed5-1370523e57bd-hi-IN\"> </a><p><b>status</b>: Requested</p><p><b>intent</b>: order</p><p><b>code</b>: <span title=\"Codes:{http://terminology.hl7.org/CodeSystem/financialtaskcode reprocess}\">Reprocess</span></p><p><b>description</b>: Request for reprocesing the claim with number - 761234674365</p><p><b>authoredOn</b>: 2025-03-07 15:32:26+0530</p><p><b>requester</b>: <a href=\"Bundle-TaskBundleForReprocessRequest-example-01.html#urn-uuid-e5625392-6cc3-4410-b30e-1cf960a31303\">Organization</a></p><p><b>owner</b>: <a href=\"Bundle-TaskBundleForReprocessRequest-example-01.html#urn-uuid-9c17b15c-b9da-44db-9932-97c9c14cd432\">Organization</a></p><p><b>reasonCode</b>: <span title=\"Codes:{https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-reason-code claimrejected}\">Reprocess request due to claim rejected by payer</span></p><h3>Inputs</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Value[x]</b></td></tr><tr><td style=\"display: none\">*</td><td><span title=\"Codes:{https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-task-input-type-code claimNumber}\">ClaimNumber</span></td><td>761234674365</td></tr></table></div>"
+        "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><a name=\"Task_a9f8295b-a0cf-410d-9ed5-1370523e57bd\"> </a><p class=\"res-header-id\"><b>Generated Narrative: Task a9f8295b-a0cf-410d-9ed5-1370523e57bd</b></p><a name=\"a9f8295b-a0cf-410d-9ed5-1370523e57bd\"> </a><a name=\"hca9f8295b-a0cf-410d-9ed5-1370523e57bd\"> </a><a name=\"a9f8295b-a0cf-410d-9ed5-1370523e57bd-hi-IN\"> </a><p><b>status</b>: Requested</p><p><b>intent</b>: order</p><p><b>code</b>: <span title=\"Codes:{http://terminology.hl7.org/CodeSystem/financialtaskcode reprocess}\">Reprocess</span></p><p><b>description</b>: Request for reprocesing the claim with number - 7612345</p><p><b>authoredOn</b>: 2025-03-07 15:32:26+0530</p><p><b>requester</b>: <a href=\"Bundle-TaskBundleForReprocessRequest-example-01.html#urn-uuid-e5625392-6cc3-4410-b30e-1cf960a31303\">Organization</a></p><p><b>owner</b>: <a href=\"Bundle-TaskBundleForReprocessRequest-example-01.html#urn-uuid-9c17b15c-b9da-44db-9932-97c9c14cd432\">Organization</a></p><p><b>reasonCode</b>: <span title=\"Codes:{https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-reason-code claimrejected}\">Reprocess request due to claim rejected by payer</span></p><h3>Inputs</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Value[x]</b></td></tr><tr><td style=\"display: none\">*</td><td><span title=\"Codes:{https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-task-input-type-code claimNumber}\">ClaimNumber</span></td><td>7612345</td></tr></table></div>"
       },
       "status" : "requested",
       "intent" : "order",
@@ -34,7 +34,7 @@
           "code" : "reprocess"
         }]
       },
-      "description" : "Request for reprocesing the claim with number - 761234674365",
+      "description" : "Request for reprocesing the claim with number - 7612345",
       "authoredOn" : "2025-03-07T15:32:26.605+05:30",
       "requester" : {
         "reference" : "urn:uuid:e5625392-6cc3-4410-b30e-1cf960a31303",
@@ -58,7 +58,7 @@
             "code" : "claimNumber"
           }]
         },
-        "valueString" : "761234674365"
+        "valueString" : "7612345"
       }]
     }
   },

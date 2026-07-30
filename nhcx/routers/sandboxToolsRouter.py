@@ -5,8 +5,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
 from nhcx.config import settings
-from nhcx.constants import PolicyIdentifierType, DummyPayerAction, DummyPayerMethod, OutboundEndpoint, UseCase
+from nhcx.constants import PolicyIdentifierType, ParticipantRole, DummyPayerAction, DummyPayerMethod, OutboundEndpoint, UseCase
 from nhcx.dependencies import requireAdminKey
+from nhcx.services.certService import certService
 from nhcx.services.participantService import participantService
 from nhcx.services.dummyPayerService import dummyPayerService
 from nhcx.services.hcxApiService import hcxApiService
@@ -20,6 +21,87 @@ router = APIRouter(prefix="/sandbox", dependencies=[Depends(requireAdminKey)])
 def getPolicies(identifierType: PolicyIdentifierType, identifierValue: str) -> dict:
     try:
         return {"ok": True, "policies": participantService.getPolicies(identifierType, identifierValue)}
+    except Exception as exc:
+        raise HTTPException(502, str(exc))
+
+
+@router.get("/certs")
+def fetchParticipantCerts(participantId: str) -> dict:
+    try:
+        return {"ok": True, "response": certService.fetchCerts(participantId)}
+    except Exception as exc:
+        raise HTTPException(502, str(exc))
+
+
+@router.get("/participants")
+def listParticipants(role: ParticipantRole, fromdate: str, todate: str) -> dict:
+    try:
+        return {"ok": True, "response": participantService.listParticipants(role, fromdate, todate)}
+    except Exception as exc:
+        raise HTTPException(502, str(exc))
+
+
+class PolicyProduct(BaseModel):
+    productid: str
+    productname: str
+
+
+class LinkPolicyRequest(BaseModel):
+    confirmSandboxMutation: bool = False
+    requestid: str | None = None
+    abhanumber: str
+    mobilenumber: str
+    payerid: str
+    memberid: str
+    processingid: str
+    policies: list[PolicyProduct]
+
+
+@router.post("/policies/link")
+def linkPolicy(req: LinkPolicyRequest) -> dict:
+    if not req.confirmSandboxMutation:
+        raise HTTPException(400, "set confirmSandboxMutation=true to link sandbox policy data")
+    try:
+        return {
+            "ok": True,
+            "response": participantService.linkPolicy(
+                abhaNumber=req.abhanumber,
+                mobileNumber=req.mobilenumber,
+                memberId=req.memberid,
+                payerId=req.payerid,
+                processingId=req.processingid,
+                policies=[policy.model_dump() for policy in req.policies],
+                requestId=req.requestid,
+            ),
+        }
+    except Exception as exc:
+        raise HTTPException(502, str(exc))
+
+
+class DelinkPolicyRequest(BaseModel):
+    confirmSandboxMutation: bool = False
+    requestid: str | None = None
+    payerid: str
+    memberid: str
+    processingid: str
+    policies: list[PolicyProduct]
+
+
+@router.post("/policies/delink")
+def delinkPolicy(req: DelinkPolicyRequest) -> dict:
+    if not req.confirmSandboxMutation:
+        raise HTTPException(400, "set confirmSandboxMutation=true to delink sandbox policy data")
+    try:
+        return {
+            "ok": True,
+            "response": participantService.delinkPolicy(
+                memberId=req.memberid,
+                payerId=req.payerid,
+                processingId=req.processingid,
+                policies=[policy.model_dump() for policy in req.policies],
+                requestId=req.requestid,
+            ),
+        }
     except Exception as exc:
         raise HTTPException(502, str(exc))
 

@@ -24,10 +24,12 @@ _BASE_ENTITY_TYPE_BY_PATH = {
     "/insuranceplan/on_request": UseCase.INSURANCE_PLAN,
     "/coverageeligibility/on_check": UseCase.COVERAGE_ELIGIBILITY,
     "/preauth/on_submit": UseCase.PREAUTH,
+    "/predetermination/on_submit": UseCase.PREDETERMINATION,
     "/claim/on_submit": UseCase.CLAIM,
     "/communication/request": UseCase.COMMUNICATION,
     "/paymentnotice/request": UseCase.PAYMENT,
     "/task/on_submit": UseCase.TASK,
+    "/search/on_submit": UseCase.SEARCH,
     "/on_status": UseCase.STATUS,
     "/v1/error": UseCase.STATUS,   # mandatory: fires when our outbound delivery died after 5 retries
 }
