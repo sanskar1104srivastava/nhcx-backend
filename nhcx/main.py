@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from mangum import Mangum
 
-from nhcx.routers import receiverRouter, senderRouter, testRouter, logsRouter, sandboxToolsRouter
+from nhcx.routers import receiverRouter, senderRouter, testRouter, logsRouter, sandboxToolsRouter, payerRouter
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s %(message)s")
 logger = logging.getLogger(__name__)
@@ -33,6 +33,7 @@ app.include_router(receiverRouter.router)
 app.include_router(testRouter.router)
 app.include_router(logsRouter.router)
 app.include_router(sandboxToolsRouter.router)
+app.include_router(payerRouter.router)
 
 
 @app.get("/health")
