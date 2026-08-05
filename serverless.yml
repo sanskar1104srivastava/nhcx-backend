@@ -55,6 +55,7 @@ functions:
     image:
       name: appimage
       command: ["nhcx.main.handler"]
+    timeout: 300
     events:
       - httpApi: "*"
     # §5c — this function owns the 202-ack SLA (~500ms). A cold-start or throttled invocation
@@ -68,6 +69,7 @@ functions:
     image:
       name: appimage
       command: ["nhcx.consumer.handler"]
+    timeout: 300
     events:
       - sqs:
           arn: !GetAtt InboundQueue.Arn
