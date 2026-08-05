@@ -1,0 +1,196 @@
+{
+  "info": {
+    "name": "NHCX Payer APIs",
+    "description": "Postman Collection for NHCX Payer APIs added to the backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Respond to Insurance Plan",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/payer/insuranceplan/on_request",
+          "host": ["{{base_url}}"],
+          "path": ["payer", "insuranceplan", "on_request"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fhir_payload\": {\n    \"resourceType\": \"Bundle\",\n    \"type\": \"collection\",\n    \"entry\": [{\"resource\": {\"resourceType\": \"Basic\", \"status\": \"active\"}}]\n  },\n  \"provider_code\": \"1000004604@hcx\",\n  \"workflow_id\": \"1\",\n  \"correlation_id\": \"<INSERT_CORRELATION_ID>\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Respond to Coverage Eligibility",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/payer/coverageeligibility/on_check",
+          "host": ["{{base_url}}"],
+          "path": ["payer", "coverageeligibility", "on_check"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fhir_payload\": {\n    \"resourceType\": \"Bundle\",\n    \"type\": \"collection\",\n    \"entry\": [{\"resource\": {\"resourceType\": \"Basic\", \"status\": \"active\"}}]\n  },\n  \"provider_code\": \"1000004604@hcx\",\n  \"workflow_id\": \"1\",\n  \"correlation_id\": \"<INSERT_CORRELATION_ID>\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Respond to Preauth",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/payer/preauth/on_submit",
+          "host": ["{{base_url}}"],
+          "path": ["payer", "preauth", "on_submit"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fhir_payload\": {\n    \"resourceType\": \"Bundle\",\n    \"type\": \"collection\",\n    \"entry\": [{\"resource\": {\"resourceType\": \"Basic\", \"status\": \"active\"}}]\n  },\n  \"provider_code\": \"1000004604@hcx\",\n  \"workflow_id\": \"1\",\n  \"correlation_id\": \"<INSERT_CORRELATION_ID>\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Respond to Claim",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/payer/claim/on_submit",
+          "host": ["{{base_url}}"],
+          "path": ["payer", "claim", "on_submit"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fhir_payload\": {\n    \"resourceType\": \"Bundle\",\n    \"type\": \"collection\",\n    \"entry\": [{\"resource\": {\"resourceType\": \"Basic\", \"status\": \"active\"}}]\n  },\n  \"provider_code\": \"1000004604@hcx\",\n  \"workflow_id\": \"1\",\n  \"correlation_id\": \"<INSERT_CORRELATION_ID>\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Respond to Search",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/payer/search/on_submit",
+          "host": ["{{base_url}}"],
+          "path": ["payer", "search", "on_submit"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fhir_payload\": {\n    \"resourceType\": \"Bundle\",\n    \"type\": \"collection\",\n    \"entry\": [{\"resource\": {\"resourceType\": \"Basic\", \"status\": \"active\"}}]\n  },\n  \"provider_code\": \"1000004604@hcx\",\n  \"workflow_id\": \"1\",\n  \"correlation_id\": \"<INSERT_CORRELATION_ID>\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Respond to Task",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/payer/task/on_submit",
+          "host": ["{{base_url}}"],
+          "path": ["payer", "task", "on_submit"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fhir_payload\": {\n    \"resourceType\": \"Bundle\",\n    \"type\": \"collection\",\n    \"entry\": [{\"resource\": {\"resourceType\": \"Basic\", \"status\": \"active\"}}]\n  },\n  \"provider_code\": \"1000004604@hcx\",\n  \"workflow_id\": \"1\",\n  \"correlation_id\": \"<INSERT_CORRELATION_ID>\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Respond to Communication",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/payer/communication/on_request",
+          "host": ["{{base_url}}"],
+          "path": ["payer", "communication", "on_request"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fhir_payload\": {\n    \"resourceType\": \"Bundle\",\n    \"type\": \"collection\",\n    \"entry\": [{\"resource\": {\"resourceType\": \"Basic\", \"status\": \"active\"}}]\n  },\n  \"provider_code\": \"1000004604@hcx\",\n  \"workflow_id\": \"1\",\n  \"correlation_id\": \"<INSERT_CORRELATION_ID>\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Request Communication",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/payer/communication/request",
+          "host": ["{{base_url}}"],
+          "path": ["payer", "communication", "request"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fhir_payload\": {\n    \"resourceType\": \"Bundle\",\n    \"type\": \"collection\",\n    \"entry\": [{\"resource\": {\"resourceType\": \"Basic\", \"status\": \"active\"}}]\n  },\n  \"provider_code\": \"1000004604@hcx\",\n  \"workflow_id\": \"1\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Send Payment Notice",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/payer/paymentnotice/request",
+          "host": ["{{base_url}}"],
+          "path": ["payer", "paymentnotice", "request"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fhir_payload\": {\n    \"resourceType\": \"Bundle\",\n    \"type\": \"collection\",\n    \"entry\": [{\"resource\": {\"resourceType\": \"Basic\", \"status\": \"active\"}}]\n  },\n  \"provider_code\": \"1000004604@hcx\",\n  \"workflow_id\": \"1\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Check Status",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/payer/status",
+          "host": ["{{base_url}}"],
+          "path": ["payer", "status"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fhir_payload\": {},\n  \"provider_code\": \"1000004604@hcx\",\n  \"workflow_id\": \"1\",\n  \"original_correlation_id\": \"<INSERT_ORIGINAL_CORRELATION_ID>\"\n}"
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000",
+      "type": "string"
+    }
+  ]
+}
