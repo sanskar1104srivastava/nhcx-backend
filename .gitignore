@@ -9,3 +9,4 @@ venv/
 *.b64
 .pytest_cache/
 .serverless/
+env.json

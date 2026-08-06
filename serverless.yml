@@ -65,6 +65,20 @@ functions:
     # (via the serverless-provisioned-concurrency-autoscaling plugin) if cold starts still bite.
     reservedConcurrency: 10
 
+  payerApi:
+    image:
+      name: appimage
+      command: ["nhcx.payer_main.handler"]
+    timeout: 300
+    events:
+      - httpApi:
+          path: /payer/{proxy+}
+          method: '*'
+      - httpApi:
+          path: /payer
+          method: '*'
+    reservedConcurrency: 10
+
   consumer:
     image:
       name: appimage

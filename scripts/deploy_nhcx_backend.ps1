@@ -25,13 +25,14 @@ param(
     [string]$RepositoryName = "serverless-nhcx-bridge-dev",
     [string]$ApiFunctionName = "nhcx-bridge-dev-api",
     [string]$ConsumerFunctionName = "nhcx-bridge-dev-consumer",
+    [string]$PayerFunctionName = "nhcx-bridge-dev-payerApi",
     [string]$Tag = "",
     [string]$ImageUri = "",
     [string]$HealthCheckUrl = "",
     [string]$EnvFile = ".env",
     [int]$TimeoutSeconds = 300,
 
-    [ValidateSet("all", "api", "consumer")]
+    [ValidateSet("all", "api", "consumer", "payerApi")]
     [string]$Function = "all",
 
     [switch]$SkipTests,
@@ -78,8 +79,11 @@ function Invoke-External {
     Write-Host "> $display"
 
     if ($Capture -or $AllowFailure) {
+        $oldError = $ErrorActionPreference
+        $ErrorActionPreference = "Continue"
         $output = & $FilePath @Arguments 2>&1
         $exitCode = $LASTEXITCODE
+        $ErrorActionPreference = $oldError
         $text = (($output | Out-String).Trim())
         if ($exitCode -ne 0 -and -not $AllowFailure) {
             throw "Command failed with exit code $exitCode`: $display`n$text"
@@ -190,11 +194,15 @@ if (Test-Blank $ApiFunctionName) {
 if (Test-Blank $ConsumerFunctionName) {
     $ConsumerFunctionName = "nhcx-bridge-$Stage-consumer"
 }
+if (Test-Blank $PayerFunctionName) {
+    $PayerFunctionName = "nhcx-bridge-$Stage-payerApi"
+}
 
 $FunctionsToDeploy = switch ($Function) {
     "api" { @("api") }
     "consumer" { @("consumer") }
-    default { @("api", "consumer") }
+    "payerApi" { @("payerApi") }
+    default { @("api", "consumer", "payerApi") }
 }
 
 Write-Step "Deployment target"
@@ -268,7 +276,7 @@ if (Test-Blank $ImageUri) {
 
     if (-not $SkipDockerBuild) {
         Write-Step "Building Lambda image"
-        Invoke-External -FilePath "docker" -Arguments @("build", "--platform", "linux/amd64", "-t", $LocalImage, ".") | Out-Null
+        Invoke-External -FilePath "docker" -Arguments @("build", "--platform", "linux/amd64", "--provenance=false", "-t", $LocalImage, ".") | Out-Null
     } else {
         Write-Step "Skipping Docker build; expecting local image $LocalImage"
     }
@@ -290,15 +298,31 @@ Write-Step "Validating Lambda functions"
 $FunctionNames = @{
     api = $ApiFunctionName
     consumer = $ConsumerFunctionName
+    payerApi = $PayerFunctionName
 }
 $ExpectedCommands = @{
     api = "nhcx.main.handler"
     consumer = "nhcx.consumer.handler"
+    payerApi = "nhcx.payer_main.handler"
 }
 
+$CreatedFunctions = @()
 foreach ($logicalName in $FunctionsToDeploy) {
     $lambdaName = $FunctionNames[$logicalName]
-    $configResult = Invoke-Aws -Arguments @("lambda", "get-function-configuration", "--function-name", $lambdaName, "--output", "json") -Capture
+    $configResult = Invoke-Aws -Arguments @("lambda", "get-function-configuration", "--function-name", $lambdaName, "--output", "json") -Capture -AllowFailure
+    
+    if ($configResult.ExitCode -ne 0) {
+        Write-Host "Function $lambdaName not found, creating it..."
+        $apiLambdaName = $FunctionNames["api"]
+        $apiConfigResult = Invoke-Aws -Arguments @("lambda", "get-function-configuration", "--function-name", $apiLambdaName, "--output", "json") -Capture
+        $apiConfig = $apiConfigResult.Output | ConvertFrom-Json
+        $roleArn = $apiConfig.Role
+        
+        Invoke-Aws -Arguments @("lambda", "create-function", "--function-name", $lambdaName, "--package-type", "Image", "--code", "ImageUri=$ImageUri", "--role", $roleArn, "--timeout", "$TimeoutSeconds", "--image-config", "Command=$($ExpectedCommands[$logicalName])", "--output", "json") | Out-Null
+        $CreatedFunctions += $logicalName
+        $configResult = Invoke-Aws -Arguments @("lambda", "get-function-configuration", "--function-name", $lambdaName, "--output", "json") -Capture
+    }
+
     $config = $configResult.Output | ConvertFrom-Json
     if ($config.PackageType -ne "Image") {
         throw "$lambdaName is PackageType '$($config.PackageType)', expected 'Image'."
@@ -317,6 +341,7 @@ foreach ($logicalName in $FunctionsToDeploy) {
 
 Write-Step "Updating Lambda code"
 foreach ($logicalName in $FunctionsToDeploy) {
+    if ($CreatedFunctions -contains $logicalName) { continue }
     $lambdaName = $FunctionNames[$logicalName]
     Invoke-Aws -Arguments @("lambda", "update-function-code", "--function-name", $lambdaName, "--image-uri", $ImageUri, "--output", "json") | Out-Null
 }
@@ -325,12 +350,17 @@ if (-not $SkipWait) {
     Write-Step "Waiting for Lambda updates"
     foreach ($logicalName in $FunctionsToDeploy) {
         $lambdaName = $FunctionNames[$logicalName]
+        if ($CreatedFunctions -contains $logicalName) {
+            Invoke-Aws -Arguments @("lambda", "wait", "function-active", "--function-name", $lambdaName) | Out-Null
+            continue
+        }
         Invoke-Aws -Arguments @("lambda", "wait", "function-updated", "--function-name", $lambdaName) | Out-Null
     }
 }
 
 Write-Step "Updating Lambda timeout"
 foreach ($logicalName in $FunctionsToDeploy) {
+    if ($CreatedFunctions -contains $logicalName) { continue }
     $lambdaName = $FunctionNames[$logicalName]
     Invoke-Aws -Arguments @("lambda", "update-function-configuration", "--function-name", $lambdaName, "--timeout", "$TimeoutSeconds", "--output", "json") | Out-Null
 }
@@ -338,6 +368,7 @@ foreach ($logicalName in $FunctionsToDeploy) {
 if (-not $SkipWait) {
     Write-Step "Waiting for timeout updates"
     foreach ($logicalName in $FunctionsToDeploy) {
+        if ($CreatedFunctions -contains $logicalName) { continue }
         $lambdaName = $FunctionNames[$logicalName]
         Invoke-Aws -Arguments @("lambda", "wait", "function-updated", "--function-name", $lambdaName) | Out-Null
     }
