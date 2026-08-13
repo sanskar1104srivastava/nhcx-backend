@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(where pdftotext 2>nul || echo \"pdftotext not found\")",
+      "Shell(pip show PyPDF2 pdfplumber pdfminer.six 2>nul | findstr \"Name:\")",
+      "Shell(pip show pymupdf 2>nul | findstr \"Name:\")",
+      "Shell(pip:*)",
+      "Shell(python D:\\NHCX-Integration\\temp_nhcx_utility\\extract_all_pdfs.py)",
+      "Shell(python -c \"import httpx, uuid, json; from nhcx.config import settings; from nhcx.services.tokenService import tokenService; headers = {'Accept': 'application/json', 'Content-Type': 'application/json', 'bearer_auth': f'Bearer {tokenService.getToken()}'}; link_body = {'requestid': str(uuid.uuid4()), 'abhanumber': '91157848323851', 'mobilenumber': '9876543210', 'payerid': settings.nhcxDummyPayerCode, 'processingid': settings.nhcxDummyPayerCode, 'memberid': 'MEM911578', 'policies': [{'productid': 'PMJAY', 'productname': 'Ayushman Bharat PMJAY'}]}; url = f'{settings.nhcxParticipantBase}/participant/link/abha/policy'; resp = httpx.post(url, json=link_body, headers=headers, timeout=30); print(f'Status: {resp.status_code}'); print(f'Response: {resp.text[:500]}')\" 2>&1)",
+      "Shell(findstr:*)",
+      "Shell(npm:*)",
+      "Shell(agent-browser:*)"
+    ],
+    "deny": [],
+    "defaultMode": "default"
+  }
+}

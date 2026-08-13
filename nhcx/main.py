@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from mangum import Mangum
 
-from nhcx.routers import receiverRouter, senderRouter, testRouter, logsRouter, sandboxToolsRouter
+from nhcx.routers import receiverRouter, senderRouter, testRouter, logsRouter, sandboxToolsRouter, authRouter
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s %(message)s")
 logger = logging.getLogger(__name__)
@@ -28,6 +28,7 @@ async def logRequests(request: Request, call_next):
 # would just AccessDeniedException. Local dev uses run_local.py's explicit preflight instead.
 
 
+app.include_router(authRouter.router)
 app.include_router(senderRouter.router)
 app.include_router(receiverRouter.router)
 app.include_router(testRouter.router)

@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 class PayerService:
     def __init__(self):
         # We fetch token dynamically per request to ensure it's fresh
-        self.participant_base_url = "https://apisbx.abdm.gov.in/pmjay/sbxhcx/participanthcxservice"
+        self.participant_base_url = settings.nhcxParticipantBase
         self.gateway_base_url = settings.nhcxGatewayBase  # e.g. "https://apisbx.abdm.gov.in/hcx/v1"
 
     def _get_headers(self) -> dict:

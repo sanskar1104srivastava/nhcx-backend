@@ -1,0 +1,214 @@
+[2m9:03:29 pm[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "../../contexts/PatientContext" from "src/app/App.tsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mD:/NHCX-Integration/frontend/src/app/App.tsx[39m:2:32
+[33m  16 |  }
+  17 |  import { Outlet } from "react-router";
+  18 |  import { PatientProvider } from "../../contexts/PatientContext";
+     |                                   ^
+  19 |  export default function App() {
+  20 |    return /* @__PURE__ */ jsxDEV(PatientProvider, { children: /* @__PURE__ */ jsxDEV(Outlet, {}, void 0, false, {[39m
+      at TransformPluginContext._formatLog (file:///D:/NHCX-Integration/frontend/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:42499:41)
+      at TransformPluginContext.error (file:///D:/NHCX-Integration/frontend/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:42496:16)
+      at normalizeUrl (file:///D:/NHCX-Integration/frontend/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:40475:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async file:///D:/NHCX-Integration/frontend/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:40594:37
+      at async Promise.all (index 4)
+      at async TransformPluginContext.transform (file:///D:/NHCX-Integration/frontend/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:40521:7)
+      at async EnvironmentPluginContainer.transform (file:///D:/NHCX-Integration/frontend/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:42294:18)
+      at async loadAndTransform (file:///D:/NHCX-Integration/frontend/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:35735:27)
+      at async viteTransformMiddleware (file:///D:/NHCX-Integration/frontend/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:37250:24)
+[2m10:06:13 pm[22m [31m[1m[vite][22m[39m [31mInternal server error: D:\NHCX-Integration\frontend\src\app\pages\NhcxPatientsPage.tsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (566:8)
+
+[0m [90m 564 |[31m           [33m<[31m[33mStepTimeline[31m current[33m=[31m{currentStep} furthestVisited[33m=[31m{furthestVisited} onStepClick[33m=[31m{goToStep} [33m/[31m[33m>[31m
+ [90m 565 |[31m         [33m<[31m[33m/[31m[33mCardHeader[31m[33m>[31m
+[31m[1m>[22m[31m[90m 566 |[31m         [33m<[31m[33mCardContent[31m className[33m=[31m[32m"space-y-6"[31m[33m>[31m
+ [90m     |[31m         [31m[1m^[22m[31m
+ [90m 567 |[31m
+ [90m 568 |[31m           {[90m/* Step 1: Patient & Doctor */[31m}
+ [90m 569 |[31m           {currentStep [33m===[31m [35m0[31m [33m&&[31m ([0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mD:/NHCX-Integration/frontend/src/app/pages/NhcxPatientsPage.tsx[39m:566:8
+[33m  574|                      <Users className="h-4 w-4 shrink-0" />
+  575|                      <span>
+  576|                        <span className="font-semibold">{duplicateMatch.fullName}</span> is already registered with this Aadhaar/ABHA number.
+     |                                           ^
+  577|                        Editing is required instead of creating a duplicate.
+  578|                      </span>[39m
+      at constructor (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:369:19)
+      at TypeScriptParserMixin.raise (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:6620:19)
+      at TypeScriptParserMixin.jsxParseElementAt (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4758:18)
+      at TypeScriptParserMixin.jsxParseElement (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4765:17)
+      at TypeScriptParserMixin.parseExprAtom (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4775:19)
+      at TypeScriptParserMixin.parseExprSubscripts (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOps (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10925:23)
+      at TypeScriptParserMixin.parseMaybeConditional (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10852:21)
+      at D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9796:39
+      at TypeScriptParserMixin.tryParse (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:6928:20)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9796:18)
+      at D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10821:39
+      at TypeScriptParserMixin.allowInAnd (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10821:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:12522:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11701:28)
+      at TypeScriptParserMixin.parseExprAtom (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOps (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10925:23)
+      at TypeScriptParserMixin.parseMaybeConditional (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10852:21)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9807:20)
+      at D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10821:39
+      at TypeScriptParserMixin.allowInAnd (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10821:17)
+      at TypeScriptParserMixin.parseConditional (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10912:30)
+      at TypeScriptParserMixin.parseConditional (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9624:18)
+      at TypeScriptParserMixin.parseMaybeConditional (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10906:17)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10852:21)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9807:20)
+      at TypeScriptParserMixin.parseExpressionBase (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10805:23)
+      at D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10801:39
+      at TypeScriptParserMixin.allowInAnd (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseExpression (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10801:17)
+      at TypeScriptParserMixin.jsxParseExpressionContainer (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4648:31)
+      at TypeScriptParserMixin.jsxParseElementAt (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4727:36)
+      at TypeScriptParserMixin.jsxParseElement (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4765:17)
+      at TypeScriptParserMixin.parseExprAtom (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4775:19)
+      at TypeScriptParserMixin.parseExprSubscripts (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11087:21)
+[2m10:06:28 pm[22m [31m[1m[vite][22m[39m [31mInternal server error: D:\NHCX-Integration\frontend\src\app\pages\NhcxPatientsPage.tsx: Unexpected token, expected "," (915:6)
+
+[0m [90m 913 |[31m       [33m<[31m[33m/[31m[33mCard[31m[33m>[31m
+ [90m 914 |[31m
+[31m[1m>[22m[31m[90m 915 |[31m       {[90m/* Saved patients */[31m}
+ [90m     |[31m       [31m[1m^[22m[31m
+ [90m 916 |[31m       [33m<[31m[33mCard[31m[33m>[31m
+ [90m 917 |[31m         [33m<[31m[33mCardHeader[31m[33m>[31m
+ [90m 918 |[31m           [33m<[31m[33mCardTitle[31m[33m>[31m[33mRegistered[31m [33mPatients[31m[33m<[31m[33m/[31m[33mCardTitle[31m[33m>[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mD:/NHCX-Integration/frontend/src/app/pages/NhcxPatientsPage.tsx[39m:915:6
+[33m  931|                          <img src={p.patientPhoto.previewUrl} alt={p.fullName} className="h-8 w-8 rounded-full object-cover border" />
+  932|                        ) : (
+  933|                          <Users className="h-4 w-4 text-gray-400" />
+     |                                                ^
+  934|                        )}
+  935|                        <span className="font-medium">{p.fullName}</span>[39m
+      at constructor (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:369:19)
+      at TypeScriptParserMixin.raise (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:6620:19)
+      at TypeScriptParserMixin.unexpected (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:6640:16)
+      at TypeScriptParserMixin.expect (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:6920:12)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11687:14)
+      at TypeScriptParserMixin.parseExprAtom (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOps (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10925:23)
+      at TypeScriptParserMixin.parseMaybeConditional (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10852:21)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9807:20)
+      at D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10821:39
+      at TypeScriptParserMixin.allowInAnd (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10821:17)
+      at TypeScriptParserMixin.parseConditional (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10912:30)
+      at TypeScriptParserMixin.parseConditional (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9624:18)
+      at TypeScriptParserMixin.parseMaybeConditional (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10906:17)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10852:21)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9807:20)
+      at TypeScriptParserMixin.parseExpressionBase (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10805:23)
+      at D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10801:39
+      at TypeScriptParserMixin.allowInAnd (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseExpression (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10801:17)
+      at TypeScriptParserMixin.jsxParseExpressionContainer (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4648:31)
+      at TypeScriptParserMixin.jsxParseElementAt (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4727:36)
+      at TypeScriptParserMixin.jsxParseElement (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4765:17)
+      at TypeScriptParserMixin.parseExprAtom (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4775:19)
+      at TypeScriptParserMixin.parseExprSubscripts (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOps (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10925:23)
+      at TypeScriptParserMixin.parseMaybeConditional (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10852:21)
+      at D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9796:39
+      at TypeScriptParserMixin.tryParse (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:6928:20)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9796:18)
+      at D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10821:39
+      at TypeScriptParserMixin.allowInAnd (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10821:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:12522:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11701:28)
+      at TypeScriptParserMixin.parseExprAtom (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4780:20)
+[2m10:07:02 pm[22m [31m[1m[vite][22m[39m [31mInternal server error: D:\NHCX-Integration\frontend\src\app\pages\NhcxPatientsPage.tsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (1045:4)
+
+[0m [90m 1043 |[31m         [33m<[31m[33m/[31m[33mCardContent[31m[33m>[31m
+ [90m 1044 |[31m       [33m<[31m[33m/[31m[33mCard[31m[33m>[31m
+[31m[1m>[22m[31m[90m 1045 |[31m     [33m<[31m[33m/[31m[33mdiv[31m[33m>[31m
+ [90m      |[31m     [31m[1m^[22m[31m
+ [90m 1046 |[31m   )[33m;[31m
+ [90m 1047 |[31m }
+ [90m 1048 |[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mD:/NHCX-Integration/frontend/src/app/pages/NhcxPatientsPage.tsx[39m:1045:4
+      at constructor (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:369:19)
+      at TypeScriptParserMixin.raise (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:6620:19)
+      at TypeScriptParserMixin.jsxParseElementAt (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4758:18)
+      at TypeScriptParserMixin.jsxParseElement (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4765:17)
+      at TypeScriptParserMixin.parseExprAtom (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4775:19)
+      at TypeScriptParserMixin.parseExprSubscripts (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOps (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10925:23)
+      at TypeScriptParserMixin.parseMaybeConditional (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10852:21)
+      at D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9796:39
+      at TypeScriptParserMixin.tryParse (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:6928:20)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9796:18)
+      at D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10821:39
+      at TypeScriptParserMixin.allowInAnd (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10821:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:12522:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11701:28)
+      at TypeScriptParserMixin.parseExprAtom (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOps (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10925:23)
+      at TypeScriptParserMixin.parseMaybeConditional (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10852:21)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9807:20)
+      at TypeScriptParserMixin.parseConditional (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10914:29)
+      at TypeScriptParserMixin.parseConditional (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9624:18)
+      at TypeScriptParserMixin.parseMaybeConditional (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10906:17)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10852:21)
+      at TypeScriptParserMixin.parseMaybeAssign (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9807:20)
+      at TypeScriptParserMixin.parseExpressionBase (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10805:23)
+      at D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10801:39
+      at TypeScriptParserMixin.allowInAnd (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseExpression (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10801:17)
+      at TypeScriptParserMixin.jsxParseExpressionContainer (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4648:31)
+      at TypeScriptParserMixin.jsxParseElementAt (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4727:36)
+      at TypeScriptParserMixin.jsxParseElement (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4765:17)
+      at TypeScriptParserMixin.parseExprAtom (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:4775:19)
+      at TypeScriptParserMixin.parseExprSubscripts (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (D:\NHCX-Integration\frontend\node_modules\@babel\parser\lib\index.js:10920:61)

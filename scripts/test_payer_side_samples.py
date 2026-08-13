@@ -17,7 +17,6 @@ class PayerSideSamplesTestCase(unittest.TestCase):
                 "coverageeligibility",
                 "preauth",
                 "claim",
-                "predetermination",
                 "communication",
                 "paymentnotice",
                 "task",

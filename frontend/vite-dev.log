@@ -1,0 +1,79 @@
+
+> nhcx-frontend@0.1.0 dev
+> vite --host 127.0.0.1
+
+
+  [32m[1mVITE[22m v6.3.5[39m  [2mready in [0m[1m672[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5173[22m/[39m
+[2m8:29:54 pm[22m [36m[1m[vite][22m[39m [32m.env changed, restarting server...[39m
+[2m8:29:54 pm[22m [36m[1m[vite][22m[39m server restarted.
+[2m8:30:49 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /src/contexts/AuthContext.tsx, /src/app/pages/DashboardPage.tsx, /src/app/pages/SendRequestPage.tsx, /src/app/pages/PatientOnboardingPage.tsx, /src/app/pages/SandboxToolsPage.tsx, /src/app/pages/RequestLogsPage.tsx[22m
+[2m8:30:49 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /src/contexts/AuthContext.tsx, /src/app/pages/DashboardPage.tsx, /src/app/pages/SendRequestPage.tsx, /src/app/pages/PatientOnboardingPage.tsx, /src/app/pages/SandboxToolsPage.tsx, /src/app/pages/RequestLogsPage.tsx[22m
+[2m8:30:49 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/contexts/AuthContext.tsx, /src/styles/index.css[22m
+[2m8:30:49 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/app/pages/LoginPage.tsx, /src/styles/index.css[22m
+[2m8:30:49 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /src/contexts/AuthContext.tsx[22m
+[2m8:30:49 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/services/index.ts[22m
+[2m8:30:50 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/contexts/AuthContext.tsx[22m Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m8:30:50 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/app/App.tsx, /src/styles/index.css, /src/app/components/shared/ProtectedRoute.tsx, /src/app/components/layouts/MainLayout.tsx, /src/app/pages/LoginPage.tsx[22m
+[2m8:30:52 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32m✨ new dependencies optimized: [33m@react-oauth/google[32m[39m
+[2m8:30:52 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32m✨ optimized dependencies changed. reloading[39m
+[2m8:31:22 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/app/App.tsx, /src/styles/index.css[22m
+[2m8:32:21 pm[22m [36m[1m[vite][22m[39m [32mvite.config.ts changed, restarting server...[39m
+[2m8:32:21 pm[22m [36m[1m[vite][22m[39m server restarted.
+[2m8:34:47 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\components\layouts\MainLayout.tsx, /src/styles/index.css[22m
+[2m8:36:06 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SandboxToolsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SendRequestPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\RequestLogsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\PatientOnboardingPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\DashboardPage.tsx[22m
+[2m8:39:14 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/app/App.tsx, /src/styles/index.css[22m
+[2m8:39:14 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /src/contexts/AuthContext.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\LoginPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SandboxToolsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SendRequestPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\RequestLogsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\PatientOnboardingPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\DashboardPage.tsx[22m
+[2m8:39:14 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\components\layouts\MainLayout.tsx, /src/styles/index.css[22m
+[2m8:39:56 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/app/App.tsx, /src/styles/index.css[22m
+[2m8:39:56 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\components\layouts\MainLayout.tsx, /src/styles/index.css[22m
+[2m8:39:56 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/app/App.tsx, /src/styles/index.css[22m
+[2m8:40:50 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\LoginPage.tsx, /src/styles/index.css[22m
+[2m8:40:50 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\components\shared\ProtectedRoute.tsx, /src/styles/index.css[22m
+[2m8:42:17 pm[22m [36m[1m[vite][22m[39m [32m.env changed, restarting server...[39m
+[2m8:42:17 pm[22m [36m[1m[vite][22m[39m server restarted.
+[2m8:42:40 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SendRequestPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\DashboardPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\RequestLogsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SandboxToolsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\PatientOnboardingPage.tsx[22m
+[2m8:43:19 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/services/index.ts[22m
+[2m8:55:20 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SendRequestPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\DashboardPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\RequestLogsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SandboxToolsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\PatientOnboardingPage.tsx[22m
+[2m8:56:01 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SendRequestPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\DashboardPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\RequestLogsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SandboxToolsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\PatientOnboardingPage.tsx[22m
+[2m8:56:27 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/app/App.tsx, /src/styles/index.css[22m
+[2m8:56:27 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\components\layouts\MainLayout.tsx, /src/styles/index.css[22m
+[2m8:56:46 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32m✨ new dependencies optimized: [33m@radix-ui/react-dialog, @radix-ui/react-accordion[32m[39m
+[2m8:56:46 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32m✨ optimized dependencies changed. reloading[39m
+[2m8:56:55 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\PatientOnboardingPage.tsx, /src/styles/index.css[22m
+[2m8:56:55 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\DashboardPage.tsx, /src/styles/index.css[22m
+[2m9:03:29 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/app/App.tsx, /src/styles/index.css[22m
+[2m9:03:38 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/app/App.tsx[22m
+[2m9:04:03 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/app/routes.tsx[22m
+[2m9:04:33 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPatientsPage.tsx, /src/styles/index.css[22m
+[2m9:04:52 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPatientsPage.tsx, /src/styles/index.css[22m
+[2m9:04:59 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPatientsPage.tsx, /src/styles/index.css[22m
+[2m9:05:44 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPage.tsx, /src/styles/index.css[22m
+[2m9:05:52 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPage.tsx, /src/styles/index.css[22m
+[2m9:06:11 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPage.tsx, /src/styles/index.css[22m
+[2m9:07:25 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\SendRequestPage.tsx, /src/styles/index.css[22m
+[2m9:07:46 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPage.tsx, /src/styles/index.css[22m
+[2m10:03:59 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SendRequestPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\RequestLogsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SandboxToolsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPage.tsx[22m
+[2m10:04:13 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/contexts/AuthContext.tsx[22m
+[2m10:04:47 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/app/App.tsx, /src/styles/index.css[22m
+[2m10:05:08 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\components\layouts\MainLayout.tsx, /src/styles/index.css[22m
+[2m10:05:30 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPatientsPage.tsx, /src/styles/index.css[22m
+[2m10:05:36 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPatientsPage.tsx, /src/styles/index.css[22m
+[2m10:05:57 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPatientsPage.tsx, /src/styles/index.css[22m
+[2m10:06:12 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPatientsPage.tsx, /src/styles/index.css[22m
+[2m10:06:28 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPatientsPage.tsx, /src/styles/index.css[22m
+[2m10:07:01 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPatientsPage.tsx, /src/styles/index.css[22m
+[2m10:07:17 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPatientsPage.tsx, /src/styles/index.css[22m
+[2m10:07:26 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPatientsPage.tsx, /src/styles/index.css[22m
+[2m10:16:43 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SendRequestPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\RequestLogsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SandboxToolsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPage.tsx[22m
+[2m10:17:16 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SendRequestPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\RequestLogsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SandboxToolsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPage.tsx[22m
+[2m10:27:49 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SendRequestPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\RequestLogsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\SandboxToolsPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\NhcxPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\contexts\AuthContext.tsx[22m
+[2m10:28:22 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\contexts\AuthContext.tsx, /src/styles/index.css[22m
+[2m10:28:23 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/@fs/D:\NHCX-Integration\frontend\src\contexts\AuthContext.tsx[22m Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m10:28:23 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /src/app/App.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\pages\LoginPage.tsx, /@fs/D:\NHCX-Integration\frontend\src\app\components\layouts\MainLayout.tsx[22m
+[2m10:29:21 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\pages\LoginPage.tsx, /src/styles/index.css[22m
+[2m10:31:49 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/app/App.tsx, /src/styles/index.css[22m
+[2m10:32:16 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/app/App.tsx, /src/styles/index.css[22m
+[2m10:33:20 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\components\layouts\MainLayout.tsx, /src/styles/index.css[22m
+[2m10:33:42 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/@fs/D:\NHCX-Integration\frontend\src\app\components\layouts\MainLayout.tsx, /src/styles/index.css[22m

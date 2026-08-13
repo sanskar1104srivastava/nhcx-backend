@@ -26,11 +26,6 @@ WORKFLOW_API_DETAILS: Dict[str, Dict[str, str]] = {
         "useCase": "claim",
         "endpoint": "/claim/submit",
     },
-    "predetermination": {
-        "fixture": "claimBundlePredetermination-dummyPayer.json",
-        "useCase": "predetermination",
-        "endpoint": "/predetermination/submit",
-    },
     "communication": {
         "fixture": "taskBundleCommunicationResponse-dummyPayer.json",
         "useCase": "communication",
